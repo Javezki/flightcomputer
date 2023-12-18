@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Wire.h>
 
 //Serial is computer serial
 //Serial5 is ant
@@ -40,9 +41,13 @@ void setup() {
   //sets baude rate to 4800
   Serial8.println("$PMTK251,4800*14");
 
-
   //sets GPS to 0.5HZ 
   //Serial8.println("$PMTK220,5000*1B");
+
+  //ABOVE IS FOR GPS
+  //BELOW IS FOR IMU
+
+  
 
 }
 
@@ -54,5 +59,6 @@ void loop() {
     Serial.print(c);
     Serial5.print(c);
   }
+  delay(10);
 }
 
