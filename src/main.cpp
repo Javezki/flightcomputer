@@ -79,11 +79,15 @@ void loop() {
     previousMillis = currentMillis;
     accelerometerData = readAccValues();
 
+    
     pr(String(millis()) + ",");
     pr(accelerometerData + ",");
     pr(String(bmp.readTemperature()) + ",");
     pr(String(bmp.readPressure()) + ",");
     pr(String(bmp.readAltitude(1027)) + "\n");
+    
+
+    //pr(String(millis()) + "," + accelerometerData + "," + bmp.readPressure()) + "," + bmp.readAltitude(1027) + "\n");
   }
 
   GPS.read();
@@ -92,9 +96,11 @@ void loop() {
 
     pr(String(millis()) + ",");
     pr(accelerometerData + ",");
+    
     pr(String(bmp.readTemperature()) + ",");
     pr(String(bmp.readPressure()) + ",");
     pr(String(bmp.readAltitude(1027)) + ",");
+
     pr(String(GPS.latitude, 4) + GPS.lat + ",");
     pr(String(GPS.longitude, 4) + GPS.lon + "\n");
 
