@@ -28,7 +28,7 @@ String accelerometerData;
 void setup()
 {
   Serial5.begin(9600); // antenna
-  Serial.begin(115200);
+  Serial.begin(9600);
   GPS.begin(4800);
   bmp.begin();
 
@@ -73,54 +73,37 @@ String readAccValues() {
 }
 
 
-void loop()
-{
+void pr(const String &data) {
+  Serial.print(data);
+  Serial5.print(data);
+}
+
+void loop() {
   unsigned long currentMillis = millis();
 
   if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis; 
+    previousMillis = currentMillis;
     accelerometerData = readAccValues();
 
-    Serial.print(millis());
-    Serial.print(",");
-
-    Serial.print(accelerometerData);
-    Serial.print(",");
-
-    Serial.print(bmp.readTemperature());
-    Serial.print(",");
-    Serial.print(bmp.readPressure());
-    Serial.print(",");
-    Serial.println(bmp.readAltitude(1027)); /* Adjusted to local forecast! */
-
-
+    pr(String(millis()) + ",");
+    pr(accelerometerData + ",");
+    pr(String(bmp.readTemperature()) + ",");
+    pr(String(bmp.readPressure()) + ",");
+    pr(String(bmp.readAltitude(1027)) + "\n");
   }
-    
-    GPS.read();
-    if (GPS.newNMEAreceived()) {
 
-      accelerometerData = readAccValues();
+  GPS.read();
+  if (GPS.newNMEAreceived()) {
+    accelerometerData = readAccValues();
 
-      Serial.print(millis());
-      Serial.print(",");
+    pr(String(millis()) + ",");
+    pr(accelerometerData + ",");
+    pr(String(bmp.readTemperature()) + ",");
+    pr(String(bmp.readPressure()) + ",");
+    pr(String(bmp.readAltitude(1027)) + ",");
+    pr(String(GPS.latitude, 4) + GPS.lat + ",");
+    pr(String(GPS.longitude, 4) + GPS.lon + "\n");
 
-      Serial.print(accelerometerData);
-      Serial.print(",");
-
-      Serial.print(bmp.readTemperature());
-      Serial.print(",");
-      Serial.print(bmp.readPressure());
-      Serial.print(",");
-      Serial.print(bmp.readAltitude(1027)); /* Adjusted to local forecast! */
-      Serial.print(",");
-
-      Serial.print(GPS.latitude, 4); Serial.print(GPS.lat);
-      Serial.print(",");
-      Serial.print(GPS.longitude, 4); Serial.println(GPS.lon);
-
-
-      if (!GPS.parse(GPS.lastNMEA())){} // this sets the newNMEAreceived() flag to false I cannot find a
-      
-
-    }
+    if (!GPS.parse(GPS.lastNMEA())) {}
+  }
 }
