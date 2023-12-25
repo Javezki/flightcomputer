@@ -11,7 +11,6 @@
 
 Adafruit_BMP280 bmp(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
 
-
 #define GPSSerial Serial8
 Adafruit_GPS GPS(&GPSSerial);
 
@@ -23,7 +22,6 @@ const int MPU = 0x68; // MPU6050 I2C address
 float AccX, AccY, AccZ;
 int16_t AccX_raw, AccY_raw, AccZ_raw;
 String accelerometerData;
-
 
 void setup()
 {
@@ -49,9 +47,6 @@ void setup()
                   Adafruit_BMP280::SAMPLING_X16,    /* Pressure oversampling */
                   Adafruit_BMP280::FILTER_X16,      /* Filtering. */
                   Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
-
-
-
 }
 
 String readAccValues() {
@@ -71,7 +66,6 @@ String readAccValues() {
   String result = String(AccX) + "," + String(AccY) + "," + String(AccZ);
   return result;
 }
-
 
 void pr(const String &data) {
   Serial.print(data);
