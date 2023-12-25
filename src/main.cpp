@@ -102,7 +102,8 @@ void loop() {
     pr(String(bmp.readAltitude(1027)) + ",");
 
     pr(String(GPS.latitude, 4) + GPS.lat + ",");
-    pr(String(GPS.longitude, 4) + GPS.lon + "\n");
+    pr(String(GPS.longitude, 4) + GPS.lon);
+    pr("\n");
 
     if (!GPS.parse(GPS.lastNMEA())) {}
   }
