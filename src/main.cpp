@@ -95,21 +95,11 @@ void loop() {
   if (GPS.newNMEAreceived()) {
     accelerometerData = readAccValues();
 
-    pr(String(millis()) + "," + accelerometerData + "," + String(bmp.readTemperature()) + "," + bmp.readPressure() + "," + bmp.readAltitude(1027) +  "," + String(GPS.latitude, 4) + String(GPS.lat) + "," + String(GPS.longitude, 4) + String(GPS.lon) + "\n");
+    if(GPS.lat){
+      pr(String(millis()) + "," + accelerometerData + "," + String(bmp.readTemperature()) + "," + bmp.readPressure() + "," + bmp.readAltitude(1027) +  "," + 
+       String(GPS.latitude, 4) + String(GPS.lat) + "," + String(GPS.longitude, 4) + String(GPS.lon) + "\n");
 
-
-    /*
-    pr(String(millis()) + ",");
-    pr(accelerometerData + ",");
-    
-    pr(String(bmp.readTemperature()) + ",");
-    pr(String(bmp.readPressure()) + ",");
-    pr(String(bmp.readAltitude(1027)) + ",");
-
-    pr(String(GPS.latitude, 4) + GPS.lat + ",");
-    pr(String(GPS.longitude, 4) + GPS.lon);
-    pr("\n");
-    */
+    }
 
     if (!GPS.parse(GPS.lastNMEA())) {}
   }
